@@ -17,10 +17,10 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -28,9 +28,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
         
         {/* Logo - Ensuring clear visibility */}
-        <Link href="#home" className="flex items-center">
+        <Link href="/" className="flex items-center">
           <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
-            <Image src="/brand-logo.jpg" alt="CB" fill className="object-cover" priority />
+            <Image src="/logo.jpg" alt="CB" fill className="object-cover" priority />
           </div>
         </Link>
 
@@ -45,7 +45,8 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <Link href="#contact" className="bg-black text-white text-sm font-bold tracking-wide uppercase py-2.5 px-6 rounded-none hover:bg-gray-800 transition-colors">
+          <Link href="/contact" className="bg-black text-white text-sm font-bold tracking-wide uppercase py-2.5 px-6 rounded-none hover:bg-gray-800 transition-colors">
+
             Start a Project
           </Link>
         </div>
@@ -83,8 +84,8 @@ export default function Navbar() {
             ))}
             <li className="pt-6 border-t border-gray-200 mt-2">
               <Link 
-                href="#contact" 
-                className="block w-full bg-black text-white font-bold tracking-wide uppercase py-4 rounded-none hover:bg-gray-800 transition-colors"
+                href="/contact" 
+                className="block w-full bg-black text-white font-bold tracking-wide uppercase py-4 rounded-none hover:bg-gray-800 transition-colors text-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Start a Project

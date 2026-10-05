@@ -8,7 +8,7 @@ export default function PersonalBrandHeader() {
         
         {/* Subtle Background Elements */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
-           <Image src="/cb-logo.jpg" alt="Brand Accent" width={1000} height={1000} className="object-cover grayscale" priority />
+           <Image src="/logo.jpg" alt="Brand Accent" width={1000} height={1000} className="object-cover grayscale" priority />
         </div>
 
         {/* Identity - Removed the logo above the name per request */}

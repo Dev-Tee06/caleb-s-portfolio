@@ -11,26 +11,24 @@ export default function ContactForm() {
     setStatus("loading");
     setErrorMessage("");
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      projectType: formData.get("projectType"),
-      budget: formData.get("budget"),
-      timeline: formData.get("timeline"),
-      message: formData.get("message"),
-    };
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
     try {
-      // Simulate API call for now (can be replaced with Next.js Server Action or API Route)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+      });
       
-      if (!data.name || !data.email || !data.message) {
-        throw new Error("Please fill out all required fields.");
+      if (!response.ok) {
+        throw new Error("Failed to send message.");
       }
 
       setStatus("success");
-      e.currentTarget.reset();
+      form.reset();
     } catch (err: unknown) {
       setStatus("error");
       if (err instanceof Error) {
@@ -42,7 +40,11 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto text-left space-y-8">
+    <form action="https://formsubmit.co/caleboluwapelumi9@gmail.com" method="POST" onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto text-left space-y-8">
+      {/* Disable captcha for seamless experience (optional based on formsubmit.co features) */}
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_subject" value="New Portfolio Inquiry" />
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <label htmlFor="name" className="block text-xs font-bold tracking-[0.2em] uppercase text-gray-400 mb-3">Full Name *</label>
@@ -99,3 +101,4 @@ export default function ContactForm() {
     </form>
   );
 }
+

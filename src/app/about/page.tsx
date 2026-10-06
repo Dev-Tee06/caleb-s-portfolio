@@ -59,7 +59,43 @@ export default function AboutPage() {
     <main className="min-h-screen relative bg-white selection:bg-black selection:text-white">
       <Navbar />
       
-      <section className="pt-40 pb-32 max-w-7xl mx-auto px-6 bg-white">
+      <section className="pt-40 pb-16 max-w-7xl mx-auto px-6 bg-white">
+        <div className="mb-12 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <h3 className="text-sm font-bold tracking-[0.2em] text-gray-400 uppercase mb-4">About Caleb</h3>
+            <h1 className="text-5xl md:text-7xl font-extrabold text-black tracking-tight">I'm Caleb<br/>Oluwapelumi.</h1>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-12 items-start">
+          <div className="text-xl text-gray-600 max-w-3xl font-light leading-relaxed space-y-6 flex-1">
+            <p>
+              I’m a Marketing & Sales Strategist with hands on experience across marketing, digital media, technology, and business operations.
+            </p>
+            <p>
+              I enjoy solving problems.
+            </p>
+            <p>
+              Sometimes that means developing a marketing strategy.<br />
+              Sometimes it means positioning a brand.<br />
+              Sometimes it means building a website.<br />
+              Sometimes it means editing the video, running the campaign, or figuring out a better digital solution.
+            </p>
+            <div className="pt-4">
+              <p className="font-bold text-black mb-2">The common thread is simple:</p>
+              <p>
+                Find the problem.<br />
+                Understand the opportunity.<br />
+                Build the solution.
+              </p>
+            </div>
+          </div>
+          <div className="w-full md:w-2/5 lg:w-1/3 aspect-[4/5] relative rounded-3xl overflow-hidden shadow-xl border border-gray-100 -mt-12 md:-mt-24">
+            <Image src="/hero.jpg" alt="Caleb Oluwapelumi" fill className="object-cover" />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 max-w-7xl mx-auto px-6 bg-white">
         <div className="mb-24 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
             <h3 className="text-sm font-bold tracking-[0.2em] text-gray-400 uppercase mb-4">Capabilities</h3>

@@ -7,9 +7,9 @@ export default function ContactPage() {
     <main className="min-h-screen relative bg-white selection:bg-black selection:text-white">
       <Navbar />
       
-      <section className="pt-40 pb-32 bg-black min-h-screen">
+      <section className="bg-[#101827] pt-32 pb-20 md:pt-40 md:pb-24">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-14">
             <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">Let&apos;s Talk</h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
               Tell me what you&apos;re working on, what you&apos;re trying to achieve, or what isn&apos;t working. Let&apos;s figure out the next move.
@@ -25,13 +25,13 @@ export default function ContactPage() {
               </a>
             </div>
           </div>
-          <div className="border-2 border-white p-10 md:p-16 bg-black relative shadow-[16px_16px_0px_0px_rgba(255,255,255,1)]">
+          <div className="border border-white/20 p-6 sm:p-10 md:p-14 bg-[#101827] relative shadow-[0_24px_70px_rgba(0,0,0,0.2)] rounded-[1.75rem]">
             <ContactForm />
           </div>
         </div>
       </section>
 
-      <footer className="py-16 bg-white border-t border-gray-200">
+      <footer className="py-10 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-6">
             <div className="bg-white p-1 rounded-full border border-gray-100 shadow-sm hover:border-gray-300 transition-all overflow-hidden w-12 h-12 relative">

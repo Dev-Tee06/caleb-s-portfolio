@@ -5,6 +5,16 @@ import Navbar from "@/components/Navbar";
 
 const projects = [
   {
+    id: "ayodele-awemini-ministries",
+    name: "Ayodele Awe",
+    image: "/case8.png",
+    website: "https://www.ayodeleaweministries.com/",
+    description:
+      "A faith-centered digital presence designed to communicate the ministry's message and services with clarity.",
+    caseStudy:
+      "The ministry needed a clear and welcoming online home. The website presents its message and services through a considered visual hierarchy, accessible content, and straightforward navigation, giving visitors a more direct way to understand the ministry and its work.",
+  },
+  {
     id: "ethos-cliff",
     name: "Ethos Cliff",
     image: "/case1.png",
@@ -13,6 +23,16 @@ const projects = [
       "A brand visibility project focused on helping businesses find their voice.",
     caseStudy:
       "Ethos Cliff focuses on helping businesses develop a stronger voice, identity, and visibility. We crafted a comprehensive brand visibility strategy and delivered professional personal and business branding. By optimizing their digital presence, SEO, and visual design, we ensured their brand communicates effectively and stands out in a crowded market.",
+  },
+  {
+    id: "teenspray",
+    name: "Teenspray",
+    image: "/case3.png",
+    website: null,
+    description:
+      "A youth-focused project bringing brand strategy and visual communication together.",
+    caseStudy:
+      "The project focused on creating a youth-oriented visual direction and a more consistent way for the brand to communicate with its audience. The available work emphasizes brand presentation and visual communication across digital touchpoints.",
   },
   {
     id: "the-wavee-media",
@@ -78,13 +98,13 @@ export default async function ProjectDetail(props: {
   }
 
   return (
-    <main className="min-h-screen relative bg-white selection:bg-black selection:text-white pb-32">
+    <main className="min-h-screen relative bg-[#F7F6F2] text-[#182230] selection:bg-[#101827] selection:text-[#F7F6F2] pb-20">
       <Navbar />
 
-      <div className="pt-32 max-w-5xl mx-auto px-6">
+      <div className="mx-auto max-w-6xl px-6 pt-32 md:pt-40">
         <Link
-          href="/portfolio"
-          className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-black mb-12 transition-colors"
+          href="/portfolio/website-development"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#667085] transition-colors hover:text-[#101827]"
         >
           <svg
             className="w-4 h-4"
@@ -99,42 +119,43 @@ export default async function ProjectDetail(props: {
               d="M10 19l-7-7m0 0l7-7m-7 7h18"
             />
           </svg>
-          Back to Projects
+          Back to websites
         </Link>
 
-        <h1 className="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight text-black">
+        <h1 className="mb-5 text-4xl font-extrabold tracking-tight text-[#101827] sm:text-5xl md:text-7xl">
           {project.name}
         </h1>
-        <p className="text-xl md:text-2xl text-gray-600 mb-16 leading-relaxed font-light">
+        <p className="mb-10 max-w-3xl text-lg leading-relaxed text-[#667085] md:mb-12 md:text-xl">
           {project.description}
         </p>
 
-        <div className="w-full aspect-video md:aspect-[21/9] bg-gray-100 relative rounded-3xl overflow-hidden mb-16 shadow-xl border border-gray-100">
+        <div className="relative mb-10 aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] border border-[#101827]/10 bg-[#101827]/5 shadow-[0_20px_60px_rgba(16,24,39,0.08)] md:mb-12 md:aspect-[16/8]">
           <Image
             src={project.image}
-            alt={project.name}
+            alt={`${project.name} website preview`}
             fill
             className="object-cover object-top"
             priority
+            sizes="(max-width: 768px) 100vw, 1152px"
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-8">
-            <h2 className="text-sm font-bold tracking-[0.2em] text-gray-400 uppercase mb-6">
+            <h2 className="mb-5 text-sm font-bold tracking-[0.2em] uppercase text-[#22B8B0]">
               Case Study
             </h2>
-            <div className="prose prose-lg text-gray-800 leading-relaxed font-light">
+            <div className="max-w-3xl text-lg leading-relaxed text-[#667085]">
               <p>{project.caseStudy}</p>
             </div>
 
-            <div className="mt-16 pt-8 border-t border-gray-200">
-              {project.website !== "#" ? (
+            <div className="mt-8 border-t border-[#101827]/10 pt-7">
+              {project.website ? (
                 <a
                   href={project.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-none font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors border-2 border-black"
+                  className="inline-flex items-center gap-3 rounded-full bg-[#101827] px-7 py-4 font-bold uppercase tracking-[0.16em] text-[#F7F6F2] transition-colors hover:bg-[#22B8B0] hover:text-[#101827]"
                 >
                   Visit Live Website
                   <svg
@@ -152,31 +173,31 @@ export default async function ProjectDetail(props: {
                   </svg>
                 </a>
               ) : (
-                <div className="inline-flex items-center gap-3 bg-gray-100 text-gray-400 px-8 py-4 rounded-none font-bold uppercase tracking-widest border-2 border-gray-100 cursor-not-allowed">
-                  Website Unavailable
+                <div className="inline-flex items-center gap-3 rounded-full border border-[#101827]/10 bg-white px-7 py-4 font-bold uppercase tracking-[0.16em] text-[#667085]">
+                  No live project link
                 </div>
               )}
             </div>
           </div>
 
           <div className="md:col-span-4">
-            <div className="bg-gray-50 p-8 rounded-3xl border border-gray-200">
-              <h3 className="text-sm font-bold tracking-[0.2em] text-gray-400 uppercase mb-4">
+            <div className="rounded-[1.75rem] border border-[#101827]/10 bg-white p-7 md:p-8">
+              <h3 className="mb-5 text-sm font-bold tracking-[0.2em] uppercase text-[#22B8B0]">
                 Project Details
               </h3>
 
-              <div className="mb-6">
-                <span className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">
+              <div className="mb-5">
+                <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-[#667085]">
                   Client
                 </span>
-                <span className="text-black font-semibold">{project.name}</span>
+                <span className="font-semibold text-[#101827]">{project.name}</span>
               </div>
 
-              <div className="mb-6">
-                <span className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">
+              <div>
+                <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-[#667085]">
                   Role
                 </span>
-                <span className="text-black font-semibold">
+                <span className="font-semibold text-[#101827]">
                   Brand Strategy & Visibility
                 </span>
               </div>

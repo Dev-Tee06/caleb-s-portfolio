@@ -59,14 +59,14 @@ export default function AboutPage() {
     <main className="min-h-screen relative bg-white selection:bg-black selection:text-white">
       <Navbar />
       
-      <section className="pt-40 pb-16 max-w-7xl mx-auto px-6 bg-white">
+      <section className="pt-32 pb-12 max-w-7xl mx-auto px-6 bg-white md:pt-40">
         <div className="mb-12 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
             <h3 className="text-sm font-bold tracking-[0.2em] text-gray-400 uppercase mb-4">About Caleb</h3>
-            <h1 className="text-5xl md:text-7xl font-extrabold text-black tracking-tight">I'm Caleb<br/>Oluwapelumi.</h1>
+            <h1 className="text-5xl md:text-7xl font-extrabold text-black tracking-tight">I&apos;m Caleb<br/>Oluwapelumi.</h1>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-12 items-start">
+        <div className="flex flex-col md:flex-row gap-10 items-start">
           <div className="text-xl text-gray-600 max-w-3xl font-light leading-relaxed space-y-6 flex-1">
             <p>
               I’m a Marketing & Sales Strategist with hands on experience across marketing, digital media, technology, and business operations.
@@ -89,14 +89,14 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-          <div className="w-full md:w-2/5 lg:w-1/3 aspect-[4/5] relative rounded-3xl overflow-hidden shadow-xl border border-gray-100 -mt-12 md:-mt-24">
+          <div className="w-full md:w-2/5 lg:w-1/3 aspect-[4/5] relative rounded-3xl overflow-hidden shadow-xl border border-gray-100 -mt-8 md:-mt-12">
             <Image src="/hero.jpg" alt="Caleb Oluwapelumi" fill className="object-cover" />
           </div>
         </div>
       </section>
 
-      <section className="py-24 max-w-7xl mx-auto px-6 bg-white">
-        <div className="mb-24 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <section className="py-16 max-w-7xl mx-auto px-6 bg-white md:py-20">
+        <div className="mb-12 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
             <h3 className="text-sm font-bold tracking-[0.2em] text-gray-400 uppercase mb-4">Capabilities</h3>
             <h1 className="text-5xl md:text-7xl font-extrabold text-black tracking-tight">What I Do</h1>
@@ -119,8 +119,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-32 max-w-7xl mx-auto px-6 bg-white">
-        <div className="mb-24 text-center">
+      <section className="py-20 max-w-7xl mx-auto px-6 bg-white md:py-24">
+        <div className="mb-14 text-center">
           <h3 className="text-sm font-bold tracking-[0.2em] text-gray-400 uppercase mb-4">Methodology</h3>
           <h2 className="text-5xl md:text-6xl font-extrabold text-black tracking-tight mb-6">Working Process</h2>
           <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto">A systematic approach to solving business problems.</p>
@@ -147,7 +147,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <footer className="py-16 bg-white border-t border-gray-200">
+      <footer className="py-10 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-6">
             <div className="bg-white p-1 rounded-full border border-gray-100 shadow-sm hover:border-gray-300 transition-all overflow-hidden w-12 h-12 relative">

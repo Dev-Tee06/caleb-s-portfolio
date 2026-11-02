@@ -3,15 +3,355 @@
 @theme {
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-cinzel), ui-serif, Georgia, serif;
+  --color-ink: #101827;
+  --color-offwhite: #F7F6F2;
+  --color-teal: #22B8B0;
+  --color-text: #182230;
+  --color-muted: #667085;
+}
+
+:root {
+  color-scheme: light;
+  /* Motion custom properties */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-short: 0.3s;
+  --dur-med: 0.75s;
+  --dur-long: 1.2s;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-outfit);
-  background-color: #ffffff;
-  color: #000000;
-  overflow-x: hidden;
+  background-color: var(--color-offwhite);
+  color: var(--color-text);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-cinzel);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =====================================================
+   REDUCED MOTION — disable all non-essential animation
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* View Transitions */
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* =====================================================
+   VIEW TRANSITIONS — page & shared-element animations
+   ===================================================== */
+
+/* Allow clicks through the overlay */
+::view-transition {
+  pointer-events: none;
+}
+
+/* Default cross-fade for unnamed elements */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: var(--ease-out);
+}
+
+/* Forward slide — new page slides in from right */
+@keyframes slide-from-right {
+  from { transform: translateX(6vw); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+@keyframes slide-to-left {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(-6vw); opacity: 0; }
+}
+
+/* Back slide — new page slides in from left */
+@keyframes slide-from-left {
+  from { transform: translateX(-6vw); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes slide-to-right {
+  from { transform: translateX(0);   opacity: 1; }
+  to   { transform: translateX(6vw); opacity: 0; }
+}
+
+/* Directional transitions activated by Link transitionTypes */
+html:active-view-transition-type(forward) {
+  &::view-transition-old(root) {
+    animation-name: slide-to-left;
+    animation-duration: 0.45s;
+    animation-timing-function: var(--ease-inout);
+  }
+  &::view-transition-new(root) {
+    animation-name: slide-from-right;
+    animation-duration: 0.45s;
+    animation-timing-function: var(--ease-out);
+  }
+}
+
+html:active-view-transition-type(back) {
+  &::view-transition-old(root) {
+    animation-name: slide-to-right;
+    animation-duration: 0.45s;
+    animation-timing-function: var(--ease-inout);
+  }
+  &::view-transition-new(root) {
+    animation-name: slide-from-left;
+    animation-duration: 0.45s;
+    animation-timing-function: var(--ease-out);
+  }
+}
+
+/* Shared element morph — category card image → page hero */
+::view-transition-group(category-image) {
+  animation-duration: 0.55s;
+  animation-timing-function: var(--ease-out);
+}
+
+/* =====================================================
+   CLIP-PATH REVEAL UTILITIES
+   ===================================================== */
+
+/* Initial hidden state — added by JS only after hydration */
+.reveal-clip {
+  clip-path: inset(100% 0 0 0);
+}
+.reveal-clip.is-revealed {
+  clip-path: inset(0% 0 0 0);
+  transition: clip-path var(--dur-med) var(--ease-out);
+}
+
+/* Fade + translate helpers (GSAP manages these, CSS as fallback) */
+.reveal-fade {
+  opacity: 0;
+  transform: translateY(60px);
+}
+.reveal-fade.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--dur-med) var(--ease-out),
+              transform var(--dur-med) var(--ease-out);
+}
+
+/* =====================================================
+   EXISTING COMPONENT STYLES
+   ===================================================== */
+
+.premium-panel {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(16, 24, 39, 0.08);
+  box-shadow: 0 18px 50px rgba(16, 24, 39, 0.08);
+}
+
+.editorial-label {
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.service-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(34,184,176,0.12), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* =====================================================
+   SCROLL PROGRESS BAR
+   ===================================================== */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #22B8B0, #101827);
+  transform-origin: left;
+  z-index: 100;
+  will-change: transform;
+}
+
+/* =====================================================
+   ANIMATED BORDER — service cards
+   ===================================================== */
+@keyframes border-draw {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+.animated-border::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #22B8B0;
+  animation: border-draw 0.6s var(--ease-out) forwards;
+  animation-play-state: paused;
+}
+
+.animated-border:hover::after,
+.animated-border:focus-within::after {
+  animation-play-state: running;
+}
+
+/* =====================================================
+   CUSTOM CURSOR
+   ===================================================== */
+@media (hover: hover) and (pointer: fine) {
+}
+
+/* =====================================================
+   MAGNETIC BUTTON TRANSITIONS
+   ===================================================== */
+.magnetic-btn {
+  transition: transform var(--dur-short) var(--ease-out);
+}
+
+/* =====================================================
+   NAV UNDERLINE ANIMATION
+   ===================================================== */
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #22B8B0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.nav-link-underline:hover::after,
+.nav-link-underline[data-active="true"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* =====================================================
+   SECTION TRANSITIONS — background colour morphing
+   ===================================================== */
+.section-bg-transition {
+  transition: background-color var(--dur-long) var(--ease-inout);
+}
+
+/* =====================================================
+   3D CARD PERSPECTIVE
+   ===================================================== */
+.perspective-card {
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+
+/* =====================================================
+   GSAP JS-CONTROLLED INITIAL STATES
+   Applied by JS, so no-JS users see content normally.
+   ===================================================== */
+.gsap-fade-init {
+  /* Set by GSAP after component mounts */
+}
+
+/* =====================================================
+   CHAPTER INDICATOR — services
+   ===================================================== */
+.chapter-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  transition: all 0.3s var(--ease-out);
+  cursor: pointer;
+}
+
+.chapter-dot.is-active,
+.chapter-dot:hover,
+.chapter-dot:focus-visible {
+  border-color: #22B8B0;
+  color: #22B8B0;
+  background: rgba(34,184,176,0.12);
+  outline: none;
+}
+
+.chapter-dot:focus-visible {
+  outline: 2px solid #22B8B0;
+  outline-offset: 3px;
+}
+
+/* =====================================================
+   PORTFOLIO CARD HOVER STATES
+   ===================================================== */
+.portfolio-card-image {
+  transition: transform 0.6s var(--ease-out);
+}
+
+.portfolio-card:hover .portfolio-card-image,
+.portfolio-card:focus-within .portfolio-card-image {
+  transform: scale(1.05);
+}
+
+.portfolio-card-arrow {
+  transition: transform 0.3s var(--ease-out);
+}
+
+.portfolio-card:hover .portfolio-card-arrow,
+.portfolio-card:focus-within .portfolio-card-arrow {
+  transform: translateX(4px);
+}
+
+/* Focus visible states for accessibility */
+.portfolio-card:focus-visible {
+  outline: 3px solid #22B8B0;
+  outline-offset: 4px;
 }
